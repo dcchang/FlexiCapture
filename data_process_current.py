@@ -6,7 +6,7 @@ from tkinter import *
 from tkinter import filedialog
 import io
 #Making GUI for easy use
-
+print('hello')
 class Main:
 	root = Tk()
 	root.title("Flex Sensor Data Processing App")
