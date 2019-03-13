@@ -1,5 +1,8 @@
 //stores voltage at 0 and 90 degrees and also gets 5 degree voltage difference
 
+#include <SPI.h>
+#include <SD.h>
+
 #if defined(ARDUINO_SAMD_ZERO) && defined(SERIAL_PORT_USBVIRTUAL)
   // Required for Serial on Zero based boards
   #define Serial SERIAL_PORT_USBVIRTUAL
