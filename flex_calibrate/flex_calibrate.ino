@@ -1,5 +1,10 @@
 //stores voltage at 0 and 90 degrees and also gets 5 degree voltage difference
 
+#if defined(ARDUINO_SAMD_ZERO) && defined(SERIAL_PORT_USBVIRTUAL)
+  // Required for Serial on Zero based boards
+  #define Serial SERIAL_PORT_USBVIRTUAL
+#endif
+
 File threshold_file;  
 
 int flexADC;
@@ -69,12 +74,11 @@ void setup() {
   threshold_file.println(voltage_90);
   
   //Resistance value at 5 degrees should be larger than resistance value at 0 degrees
-  resistance_5 = map(5.0,0,90,flexR_0,flexR_90);
-  voltage_5 = VCC *(resistance_5)/(R_DIV+resistance_5);
-  voltage_diff = voltage_5-voltage_0;
-  threshold = resting_voltage + voltage_diff;
-  Serial.println(threshold);
-  threshold_file.println(threshold);
+  float resistance_5 = map(5.0,0,90,flexR_0,flexR_90);
+  float voltage_5 = VCC *(resistance_5)/(R_DIV+resistance_5);
+  float voltage_diff = voltage_5-voltage_0;
+  Serial.println(voltage_diff);
+  threshold_file.println(voltage_diff);
 
   threshold_file.close();
   digitalWrite(LED_BUILTIN, LOW);
