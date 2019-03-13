@@ -1,7 +1,4 @@
 //output voltage increases as flex sensor resistance increases (as it bends more)
-//calibration: for each flex sensor device, get values at 0 and 90 degrees and store them in a text file on the SD card
-//these will be read into the post processing script
-
 
 #include <ArduinoSTL.h>
 #include <SPI.h>
