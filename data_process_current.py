@@ -67,7 +67,7 @@ class Menu:
 			lastname = self.lastname_entry.get()
 			#Resistance values in kohms
 			r1 = 9.75
-			v_in = 3.7 #input voltage in V
+			v_in = 3.3 #input voltage in V
 
 			#Read in resting voltage value:
 
@@ -121,7 +121,6 @@ class Menu:
 				filename = file.split('.')[0]
 				df = pd.read_csv(Main.sd_dirname + "/RAW_DATA/" + file,sep='\t') #filepath should point to 'raw_data.txt'
 				#read in times and voltages
-				dates = df['d']
 				timestamps = df['ts']
 				times = df['t'] #Gets series of time values
 				times = times.tolist() #Convert series to list
@@ -132,12 +131,9 @@ class Menu:
 				#Calculate bend angles using resistance. Bend angle is relative to resting hand position.
 				#Calculate angular velocities using bend angles
 				event_times = []  #For getting duration of an event
-				event_dates = []
 				event_timestamps = []
 
 				durations = []
-				start_dates = []
-				end_dates = []
 				start_times = []
 				end_times = []
 
@@ -151,7 +147,7 @@ class Menu:
 
 				events_file = open(output_dir + "/%s_events.txt" % (filename),'w',encoding='utf-8')
 
-				events_header = u"t\tV\tθ\tω\n"
+				events_header = u"ts\tt\tV\tθ\tω\n"
 				events_file.write(events_header)
 
 				x = 0
@@ -177,28 +173,23 @@ class Menu:
 					if voltage > resting_voltages[file_count]+voltage_diff:
 						#Store max bend angle for event in array
 						x = 1
-						event_dates.append(dates[counter])
 						event_timestamps.append(timestamps[counter])
 						event_times.append(times[counter])
 						bend_angles_event.append(bend_angle)
 						angular_velocities_event.append(angular_velocity)
-						event_string = str(dates[counter]) + "\t" + str(timestamps[counter]) + "\t" + str(times[counter])+"\t"+str(voltage)+"\t"+str(bend_angle)+"\t"+str(angular_velocity)+"\n"
+						event_string = str(timestamps[counter]) + "\t" + str(times[counter])+"\t"+str(voltage)+"\t"+str(bend_angle)+"\t"+str(angular_velocity)+"\n"
 						events_file.write(event_string)
 					
 					else:
 						if x == 1:
 							events_file.write("\n")
-							start_dates.append(event_dates[0])
-							end_dates.append(event_dates[len(event_dates)-1])
 							start_times.append(event_timestamps[0])
 							end_times.append(event_timestamps[len(event_timestamps)-1])
-
 							duration = (event_times[len(event_times)-1]-event_times[0])/1000
 							duration = round(duration,2)
 							durations.append(duration)
 							max_bend_angles.append(max(bend_angles_event))
 							average_angular_velocities.append(np.mean(angular_velocities_event))
-							event_dates = []
 							event_timestamps = []
 							event_times = []
 							bend_angles_event = []
@@ -214,15 +205,15 @@ class Menu:
 
 
 				#Restructure dataframe in correct column order
-				df = df[['d','ts','t','V','θ','ω']]
+				df = df[['ts','t','V','θ','ω']]
 
 				df.to_csv(output_dir + "/%s_post_processing.txt" % (filename), sep='\t', index=False)
 
 				#Create file for processed events
-				d = {'Start Date': start_dates, 'End Date': end_dates, 'Start Time': start_times, 'End Time': end_times, 'Time (s)': durations,'Max θ': max_bend_angles,'Avg ω': average_angular_velocities}
+				d = {'Start Time': start_times, 'End Time': end_times, 'Time (s)': durations,'Max θ': max_bend_angles,'Avg ω': average_angular_velocities}
 				df2 = pd.DataFrame(data=d)
 
-				df2 = df2[['Start Date','End Date','Start Time','End Time','Time (s)','Max θ', 'Avg ω']]
+				df2 = df2[['Start Time','End Time','Time (s)','Max θ', 'Avg ω']]
 				df2.to_csv(output_dir + '/%s_events_processed.txt' % (filename),sep='\t',index=False)
 			
 			#Final outputs

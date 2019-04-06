@@ -13,22 +13,28 @@
 #endif
 
 
-CapacitiveSensor   cs_4_2 = CapacitiveSensor(4,2);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
+CapacitiveSensor   cs_8_2 = CapacitiveSensor(3,9);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 
 void setup()                    
 {
-   cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
+   cs_8_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
    Serial.begin(9600);
+
+   pinMode(7, OUTPUT);
 }
 
 void loop()                    
 {
-    long start = millis();
-    long total1 =  cs_4_2.capacitiveSensor(30);
+//  digitalWrite(7, HIGH);
+//  delay(500);
+//  digitalWrite(7, LOW);
+//  delay(500);
+//    long start = millis();
+    long total1 =  cs_8_2.capacitiveSensor(30);
 
 //    Serial.println(millis() - start);        // check on performance in milliseconds
 
     Serial.println(total1);                  // print sensor output 1 - this is also the value you can use to use this in other projects
 
-//    ds                           // arbitrary delay to limit data to serial port 
+//    delay(100);                             // arbitrary delay to limit data to serial port 
 }
