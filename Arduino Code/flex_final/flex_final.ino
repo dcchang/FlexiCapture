@@ -5,9 +5,9 @@
 #include <SD.h>
 #include <Wire.h>
 #include "RTClib.h"
-#include "CapacitiveSensor.h"
+//#include "CapacitiveSensor.h"
 
-CapacitiveSensor   cs_3_9 = CapacitiveSensor(3,9);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
+//CapacitiveSensor   cs_3_9 = CapacitiveSensor(7,5);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 
 
 #if defined(ARDUINO_SAMD_ZERO) && defined(SERIAL_PORT_USBVIRTUAL)
@@ -37,10 +37,10 @@ int total_v = 0;                  // the running total
 int average_v = 0;                // the average
 
 //moving average variables for capacitive readings
-int readings_c[numReadings];      // the readings from the analog input
-int readIndex_c = 0;              // the index of the current reading
-int total_c = 0;                  // the running total
-int average_c = 0;                // the 
+//int readings_c[numReadings];      // the readings from the analog input
+//int readIndex_c = 0;              // the index of the current reading
+//int total_c = 0;                  // the running total
+//int average_c = 0;                // the 
 //Voltage values
 int resting_sum;
 int resting_flexADC;
@@ -70,7 +70,7 @@ int mi;
 int s;
 
 //capacitive variable
-long total1;
+//long total1;
 
 //data structure for storing information that will be written to SD card
 struct Data {
@@ -107,18 +107,18 @@ void restingCal(int count) {
 
   //set resting_sum and total1 to 0
   resting_sum = 0;
-  total1 = 0;
+//  total1 = 0;
   for (int i=0; i<5000; i++) {
     
     resting_flexADC = analogRead(FLEX_PIN);
     resting_sum += resting_flexADC;
-    total1 +=  cs_3_9.capacitiveSensor(30);
-    Serial.println(String(total1));
+//    total1 +=  cs_3_9.capacitiveSensor(30);
+//    Serial.println(String(total1));
   }
   Serial.println("Process done");
   digitalWrite(LED, LOW);
   resting_flexADC_average = resting_sum/5000;
-  total1 = total1/5000;
+//  total1 = total1/5000;
   
   resting_flexV = resting_flexADC_average * VCC/ 1023.0;  //Calculate voltage at resting position
   
@@ -129,17 +129,17 @@ void restingCal(int count) {
 
   //set total_v and total_c to 0 to initialize moving average properly
   total_v = 0;
-  total_c = 0;
+//  total_c = 0;
   // initialize all the readings to resting_flexADC:
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
     readings_v[thisReading] = resting_flexADC_average;
     total_v += readings_v[thisReading];
   }
 
-  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
-    readings_c[thisReading] = total1;
-    total_c += readings_c[thisReading];
-  }
+//  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+//    readings_c[thisReading] = total1;
+//    total_c += readings_c[thisReading];
+//  }
   
   raw_data_file.close();
   resting_voltage_file.close();
@@ -153,7 +153,7 @@ void setup() {
     while (!Serial); // for Leonardo/Micro/Zero
   #endif
 
-  cs_3_9.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
+//  cs_3_9.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
@@ -161,7 +161,6 @@ void setup() {
   pinMode(FLEX_PIN, INPUT);
   pinMode(10, OUTPUT);  //set pin for SD card
 
-  analogReadResolution(12);
   //initialize SD card
   if (!SD.begin(SPI_HALF_SPEED,10)) {
     Serial.println("initialization failed!");
@@ -197,78 +196,78 @@ void loop() {
 
   float batterylevel = analogRead(A3);
   Serial.println("BatteryVoltage = ");
-  Serial.println(batterylevel*VCC/4095.0);
-  if ((batterylevel*VCC/4095.0) < 3.3) {
+  Serial.println(batterylevel*VCC/1023.0);
+  if ((batterylevel*VCC/1023.0) < 3.3) {
     digitalWrite(LED,HIGH);
   }
   else {
     digitalWrite(LED,LOW);
   }
-  
+//  
   //moving average for capacitive sensor
-  total_c = total_c - readings_c[readIndex_c];
-  // read from the sensor:
-  readings_c[readIndex_c] = cs_3_9.capacitiveSensor(30);
-  // add the reading to the total:
-  total_c = total_c + readings_c[readIndex_c];
-  // advance to the next position in the array:
-  readIndex_c = readIndex_c + 1;
-  
-  // if we're at the end of the array...
-  if (readIndex_c >= numReadings) {
-    // ...wrap around to the beginning:
-    readIndex_c = 0;
-  }
-  
-  // calculate the average:
-  average_c = total_c / numReadings;
-  Serial.println("Cap sensor: " + String(average_c));
-
-//  //if value is less than some threshold, then device is not being worn and stop logging data
-  if (average_c < 2500) {
-    Serial.println("OFF HAND");
-    x = 1;
-  }
-
-//  if value is greater than some threshold and was just put on the wrist, recalibrate for resting voltage value
-  else if (average_c >= 2500 && x == 1) {
-    Serial.print("ON HAND?");
-
-    //some checks to make sure person is trying to put device back on arm
-    int tally = 0;
-    int cap_check = 0;
-    for (int i=0; i< 5000; i++) {
-      cap_check = cs_3_9.capacitiveSensor(30);
-      Serial.println("Cap Check: " + String(cap_check));
-      if (cap_check > 3000) {
-        tally++;
-        Serial.println("Tally: " + String(tally));
-      }
-    }
-    if (tally > 2000) {
-       x = 0;
-      counter++;
-      Serial.println("RECALIBRATION!!!");
-      delay(60000); //give the user 1 minute to put on the device
-  //    Blink to notify that calibration is about to start
-      digitalWrite(LED, HIGH);
-      delay(500);
-      digitalWrite(LED, LOW);
-      delay(500);
-      digitalWrite(LED, HIGH);
-      delay(500);
-      digitalWrite(LED, LOW);
-      delay(500);
-      restingCal(counter);
-    }
-    else {
-      for (int thisReading = 0; thisReading < numReadings; thisReading++) {
-        readings_c[thisReading] = 0;
-        total_c = 0;
-      }
-    }
-  }
-  else {
+//  total_c = total_c - readings_c[readIndex_c];
+//  // read from the sensor:
+//  readings_c[readIndex_c] = cs_3_9.capacitiveSensor(30);
+//  // add the reading to the total:
+//  total_c = total_c + readings_c[readIndex_c];
+//  // advance to the next position in the array:
+//  readIndex_c = readIndex_c + 1;
+//  
+//  // if we're at the end of the array...
+//  if (readIndex_c >= numReadings) {
+//    // ...wrap around to the beginning:
+//    readIndex_c = 0;
+//  }
+//  
+//  // calculate the average:
+//  average_c = total_c / numReadings;
+//  Serial.println("Cap sensor: " + String(average_c));
+//
+////  //if value is less than some threshold, then device is not being worn and stop logging data
+//  if (average_c < 2500) {
+//    Serial.println("OFF HAND");
+//    x = 1;
+//  }
+//
+////  if value is greater than some threshold and was just put on the wrist, recalibrate for resting voltage value
+//  else if (average_c >= 2500 && x == 1) {
+//    Serial.print("ON HAND?");
+//
+//    //some checks to make sure person is trying to put device back on arm
+//    int tally = 0;
+//    int cap_check = 0;
+//    for (int i=0; i< 5000; i++) {
+//      cap_check = cs_3_9.capacitiveSensor(30);
+//      Serial.println("Cap Check: " + String(cap_check));
+//      if (cap_check > 3000) {
+//        tally++;
+//        Serial.println("Tally: " + String(tally));
+//      }
+//    }
+//    if (tally > 2000) {
+//       x = 0;
+//      counter++;
+//      Serial.println("RECALIBRATION!!!");
+//      delay(60000); //give the user 1 minute to put on the device
+//  //    Blink to notify that calibration is about to start
+//      digitalWrite(LED, HIGH);
+//      delay(500);
+//      digitalWrite(LED, LOW);
+//      delay(500);
+//      digitalWrite(LED, HIGH);
+//      delay(500);
+//      digitalWrite(LED, LOW);
+//      delay(500);
+//      restingCal(counter);
+//    }
+//    else {
+//      for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+//        readings_c[thisReading] = 0;
+//        total_c = 0;
+//      }
+//    }
+//  }
+//  else {
  
     //Calculate moving average 
     total_v = total_v - readings_v[readIndex_v];
@@ -289,8 +288,8 @@ void loop() {
     average_v = total_v / numReadings;
     
     //Calculate voltage
-    vector_item.flexV = average_v * VCC / 4095.0; //calculate voltage
-    
+    vector_item.flexV = average_v * VCC / 1023.0; //calculate voltage
+    Serial.println(vector_item.flexV);
     end_time = millis();
   
     vector_item.current_time = end_time - start_time;
@@ -301,23 +300,24 @@ void loop() {
     mi = now.minute();
     s = now.second();
     vector_item.time_string = String(h) + ':' + String(mi) + ':' + String(s);
+//    Serial.println(vector_item.time_string);
   
     data_vector.push_back({vector_item.time_string, vector_item.current_time,vector_item.flexV});
-    Serial.println("Time: " + String(vector_item.current_time) + "\t" + "Voltage Value: " + String(vector_item.flexV));  
-   
+//    Serial.println("Time: " + String(vector_item.current_time) + "\t" + "Voltage Value: " + String(vector_item.flexV));  
+//    Serial.println(vector_item.flexV);
     if (data_vector.size() >= 100) {
       raw_data_file = SD.open(data_filename, FILE_WRITE);
-      digitalWrite(LED, HIGH);
+//      digitalWrite(LED, HIGH);
       for (int i=0; i< data_vector.size(); i++) {
         raw_data_file.println(String(data_vector[i].time_string) + "\t" + String(data_vector[i].current_time) + "\t" + String(data_vector[i].flexV));
-        Serial.println("Writing to SD Card");
+//        Serial.println("Writing to SD Card");
       }
-      digitalWrite(LED, LOW);
+//      digitalWrite(LED, LOW);
       raw_data_file.flush();
       data_vector.clear();
       raw_data_file.close();
     } 
     
-  }
+//  }
   delay(25); //measure data at intervals of 25 milliseconds
 }

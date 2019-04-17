@@ -1,2 +1,0 @@
-Start Time	End Time	Time (s)	Max θ	Avg ω
-16:25:37	16:25:37	0.04	18.82	-54.86

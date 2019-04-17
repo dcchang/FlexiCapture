@@ -10,6 +10,7 @@ class Main:
 	root = Tk()
 	root.title("Flex Sensor Data Processing App")
 	sd_dirname = "No directory selected"
+	root.wm_iconbitmap('py.ico')
 
 class Menu:
 	def __init__(self, master):
@@ -67,7 +68,7 @@ class Menu:
 			lastname = self.lastname_entry.get()
 			#Resistance values in kohms
 			r1 = 9.75
-			v_in = 3.3 #input voltage in V
+			v_in = 3.7 #input voltage in V
 
 			#Read in resting voltage value:
 

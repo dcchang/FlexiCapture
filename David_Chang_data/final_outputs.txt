@@ -1,4 +1,0 @@
-Total Event Time (Hours) = 0.005544444444444445
-Average Duration (sec) = 0.9504761904761905
-Average_max_angle (degrees) = 38.182380952380946
-Average_angular_velocity (degrees/sec) = 13.87782009134786
