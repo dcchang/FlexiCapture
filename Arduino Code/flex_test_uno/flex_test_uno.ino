@@ -1,31 +1,12 @@
-/******************************************************************************
-Flex_Sensor_Example.ino
-Example sketch for SparkFun's flex sensors
-  (https://www.sparkfun.com/products/10264)
-Jim Lindblom @ SparkFun Electronics
-April 28, 2016
+//sketch used for basic flex sensor testing while flex sensor is connected to Arduino Uno via breadboard.
+//Moving average is used to give more accurate voltage readings
 
-Create a voltage divider circuit combining a flex sensor with a 47k resistor.
-- The resistor should connect from A0 to GND.
-- The flex sensor should connect from A0 to 3.3V
-As the resistance of the flex sensor increases (meaning it's being bent), the
-voltage at A0 should decrease.
-
-Development environment specifics:
-Arduino 1.6.7
-******************************************************************************/
 const int FLEX_PIN = A1; // Pin connected to voltage divider output
 
-// Measure the voltage at 5V and the actual resistance of your
-// 47k resistor, and enter them below:
 const float VCC = 5; // Measured voltage of Ardunio 5V line
-const float R_DIV = 9.8; // Measured resistance of 3.3k resistor
+const float R_DIV = 9.8; // Measured resistance of 10k resistor (R1 in voltage divider)
 
-// Upload the code, then try to adjust these values to more
-// accurately calculate bend degree.
-const float STRAIGHT_RESISTANCE = 85.6; // resistance when straight
-const float BEND_RESISTANCE = 407.0; // resistance at 90 deg
-
+//variables for moving average of voltage value
 const int numReadings = 10;
 
 int readings[numReadings];      // the readings from the analog input
@@ -33,7 +14,7 @@ int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
 int average = 0;                // the average
 
-
+float flexV;
 
 void setup() 
 {
@@ -46,6 +27,7 @@ void setup()
 
 void loop() 
 {
+  //calculate moving average for voltage values
   total = total - readings[readIndex];
   // read from the sensor:
   readings[readIndex] = analogRead(FLEX_PIN);
@@ -62,19 +44,8 @@ void loop()
 
   // calculate the average:
   average = total / numReadings;
-  // send it to the computer as ASCII digits
-  float flexV = average * VCC/1023.0;
+ 
+  flexV = average * VCC/1023.0;  //Convert voltage value into volts
   Serial.println(flexV);
-//  delay(1);        // delay in between reads for stability
-//  float flexR = R_DIV * (VCC / flexV - 1.0);
-//  Serial.println("Resistance: " + String(flexR) + " kohms");
-//
-//  // Use the calculated resistance to estimate the sensor's
-//  // bend angle:
-//  float angle = map(flexR, STRAIGHT_RESISTANCE, BEND_RESISTANCE,
-//                   0, 90.0);
-//  Serial.println("Bend: " + String(angle) + " degrees");
-//  Serial.println();
-
   delay(25);
 }

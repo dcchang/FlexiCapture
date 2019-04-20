@@ -1,3 +1,6 @@
+#Final version of post processing script
+
+#Import packages
 import os
 import sys
 import pandas as pd
@@ -5,6 +8,7 @@ import numpy as np
 from tkinter import *
 from tkinter import filedialog
 import io
+
 #Making GUI for easy use
 class Main:
 	root = Tk()
@@ -190,7 +194,7 @@ class Menu:
 							duration = round(duration,2)
 							durations.append(duration)
 							max_bend_angles.append(max(bend_angles_event))
-							average_angular_velocities.append(np.mean(angular_velocities_event))
+							average_angular_velocities.append(round(np.mean(angular_velocities_event),2))
 							event_timestamps = []
 							event_times = []
 							bend_angles_event = []
@@ -220,15 +224,15 @@ class Menu:
 			#Final outputs
 
 			total_event_time = (sum(durations)/3600)
-			average_event_time = np.mean(durations)
-			average_max_angle = np.mean(max_bend_angles)
-			average_angular_velocity = np.mean(average_angular_velocities)  #Or np.mean(angular_velocities), not sure which one to use
+			average_event_time = round(np.mean(durations),2)
+			average_max_angle = round(np.mean(max_bend_angles),2)
+			average_angular_velocity = round(np.mean(average_angular_velocities),2)  #Or np.mean(angular_velocities), not sure which one to use
 
 			output = open(output_dir + '/final_outputs.txt','w')
 			output.write('Total Event Time (Hours) = %s\n' % total_event_time)
 			output.write('Average Duration (sec) = %s\n' % average_event_time)
-			output.write('Average_max_angle (degrees) = %s\n' % average_max_angle)
-			output.write('Average_angular_velocity (degrees/sec) = %s\n' % average_angular_velocity)
+			output.write('Average max angle (degrees) = %s\n' % average_max_angle)
+			output.write('Average angular velocity (degrees/sec) = %s\n' % average_angular_velocity)
 			output.close()
 			self.sd_label.config(text="Run complete!")
 			self.RunButton.config(state="disabled")
@@ -237,6 +241,7 @@ class Menu:
 			print(e)
 			print(sys.exc_info()[-1].tb_lineno)
 			self.run_label.config(text="Error!")
+
 #Execute code
 if __name__=="__main__":
 	Main.menu = Menu(Main.root)
