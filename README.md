@@ -70,9 +70,8 @@ User inputs:
 \
 -User inputs:
     - Patient first name and last name
-    - SD card directory\
-\
--Program outputs:\
+    - SD card directory
+-Program outputs:
     -Folder titled `firstname_lastname_data` with following files:
         - `events.txt`
         - `events_processed.txt`
