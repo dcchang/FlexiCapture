@@ -11,14 +11,17 @@ pyinstaller -w -i <py.ico> -F myscript.py
 
 ## Arduino code
 
-1. **accuracy_test.ino**/
-Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
+1. **accuracy_test.ino**
+
+ Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
 
 2. **event_test.ino**
-First version used for event testing. Controls a servo which is attached to the flex sensor. Servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves fast and slow for all angles to compare flex sensor's ability to respond to different movement speeds.
+
+ First version used for event testing. Controls a servo which is attached to the flex sensor. Servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves fast and slow for all angles to compare flex sensor's ability to respond to different movement speeds.
 
 3. **event_test2.ino**
-This sketch is the second version used for event testing. This sketch controls a servo which is attached to the flex sensor. The servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves at the same speed for all angles.
+
+ This sketch is the second version used for event testing. This sketch controls a servo which is attached to the flex sensor. The servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves at the same speed for all angles.
 
 4. **flex_calibrate.ino**
 Stores voltage at 0 and 90 degrees. Should be done prior to using device.
