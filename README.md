@@ -53,13 +53,13 @@ raw data file(s) --> timestamps, running time, and voltage for all data
 
 2. **data_process1.py**<br/>1st version of post processing script. Does not create GUI so could only be used in terminal. User must input appropriate input text file names in terminal.\
 \
-User inputs:\
+User inputs:
     - Flex sensor resistance at 0 and 90 degrees
     - resting.txt --> resting voltage value
     - raw_data.txt --> time and voltage values
     - events.txt --> time of each finger event
 
-3. **data_process2.py**<br/>2nd version of post processing script. Creates GUI for easy use. Requires user to manually upload following 3 files:\
+3. **data_process2.py**<br/>2nd version of post processing script. Creates GUI for easy use. Requires user to manually upload following 3 files:
     - resting.txt
     - raw_data.txt
     - events.txt
@@ -69,16 +69,14 @@ User inputs:\
 5. **data_process_current.py**<br/>Final version of post processing script that makes GUI for easy use. Takes in data and calculates durations, bend angles, angular velocities, and more. Person uses GUI to upload SD card directory. Script can process more than one raw data file.\
 \
 User inputs:\
-\
     - Patient first name and last name
     - SD card directory
 \
 Program outputs:\
-Folder titled firstname_lastname_data with following files:\
+Folder titled firstname_lastname_data with following files:
     - events.txt
     - events_processed.txt
     - post_processing.txt
     - final_outputs.txt
 \
-First three files have date and file count in name that corresponds to raw data file\
-i.e. 49R_0_events.txt for the first raw data file created on April 9th
+First three files have date and file count in name that corresponds to raw data file i.e. 49R_0_events.txt for the first raw data file created on April 9th.
