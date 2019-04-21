@@ -23,6 +23,27 @@ Sketch stores voltages and logs time as flex sensor is bent. Sketch considers ev
 Outputs: resting.txt --> resting voltage value
          raw_data.txt --> elapsed time and voltages for each event
          events.txt --> Time of each finger event
+         
+7. **flex_sensor_live.ino**
+This is an old version of the TinyZero code. This code is useful for seeing bend angles, angular velocity, and event data in real time
+But this version is more memory intensive and not good for long term data logging. Much of code here, such as calculating bend angles and identifying events, was moved to post processing script to save memory. Reduces memory usage reduces amount of raw data lost during data logging and storing process.
+
+Outputs: resting.txt --> resting voltage value
+         raw_data.txt --> running time, voltages, angles, angular velocities
+         events.txt --> running time, voltages, angles, angular velocities when voltage is greater than 5 degree threshold
+         
+8. **flex_v3.ino**
+This sketch records output voltage changes as flex sensor bends and device is worn during daily activity. Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider. Sketch also records timestamps and time since sketch was first uploaded to board for every data point.
+
+Outputs: resting.txt --> resting voltage value
+         raw data file(s) --> timestamps, running time, and voltage for all data
+         
+9. **flex_final.ino**
+
+
+
+
+
 
 
 
