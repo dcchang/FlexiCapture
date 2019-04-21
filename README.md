@@ -24,9 +24,9 @@ Install pyinstaller and run following command in terminal:
 6. **flex_sensor1.ino**<br/>Sketch stores voltages and logs time as flex sensor is bent. Sketch considers event to be anytime voltage is different from resting voltage. Sketch logs running timer and voltage values on raw data file only when event is occurring (so it doesn't log all data), and times of each event on separate event file.\
 \
 Outputs:
-- resting.txt --> resting voltage value\
-- raw_data.txt --> elapsed time and voltages for each event\
-- events.txt --> Time of each finger event
+    - resting.txt --> resting voltage value
+    - raw_data.txt --> elapsed time and voltages for each event
+    - events.txt --> Time of each finger event
          
 7. **flex_sensor_live.ino**<br/>This is an old version of the TinyZero code. This code is useful for seeing bend angles, angular velocity, and event data in real time. But this version is more memory intensive and not good for long term data logging. Much of code here, such as calculating bend angles and identifying events, was moved to post processing script to save memory. Reduces memory usage reduces amount of raw data lost during data logging and storing process.\
 \
