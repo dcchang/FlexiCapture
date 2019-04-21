@@ -3,3 +3,6 @@
 *There are two folders of code, one containing all Arduino sketches and other containing post processing script written in Python.*
 
 ## Arduino code
+1. accuracy_test.ino
+
+2. event_test.ino
