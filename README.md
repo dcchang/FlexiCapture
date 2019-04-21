@@ -11,7 +11,8 @@ pyinstaller -w -i <py.ico> -F myscript.py
 
 ## Arduino code
 
-1. **accuracy_test.ino**\Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
+1. **accuracy_test.ino**
+ Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
 
 2. **event_test.ino**
 
