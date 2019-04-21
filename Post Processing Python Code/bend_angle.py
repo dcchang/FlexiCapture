@@ -1,18 +1,21 @@
+#Script to get bend angles
+
 import numpy as np
 
-file = open("acc_data2.txt", "r")
+#User input
+r_0 = 12.93867925  #resistance value at 0 degrees
+r_90 = 18.21511628 #resistance value at 90 degrees
+
+
+input_file = open("acc_data.txt", "r")
 output = open("acc_results.txt", "w")
 
-data = file.read().splitlines()
-data = list(map(float,data))
+data = input_file.read().splitlines()	#Reads in values from input file into list
+data = list(map(float,data))			#Converts all values in list to floats
 
 for item in data: 
-	x = np.interp(item,[12.93867925,18.21511628],[0,90])
-	print(x)
-	# angle = np.interp(5,[0,90],[10.51685393,16.97222222])
-	# voltage_5 = 3.7*angle/(9.75+angle)
-	# print(voltage_5)
-	output.write(str(x))
+	#Uses one-dimensional linear interpolation given resistance at 0 and 90 degrees to estimate bend angle
+	angle = np.interp(item,[12.93867925,18.21511628],[0,90])	
+	print(angle)
+	output.write(str(angle))	#Saves bend angles to file
 	output.write('\n')
-	
-output.write('\n')
