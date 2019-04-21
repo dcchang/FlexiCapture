@@ -2,16 +2,16 @@
 *Lists out all the code and files used in this project.*
 *There are two folders of code, one containing all Arduino sketches and other containing post processing script written in Python.*
 
-**Upload flex_final.ino to TinyZero processor board. Use data_process_current.exe, which was built from data_process_current.py, for post processing.**
+**Upload `flex_final.ino` to TinyZero processor board. Use `data_process_current.exe`, which was built from `data_process_current.py`, for post processing.**
 
-To create application (.exe file) from python script (i.e. myscript.py), use [pyinstaller](https://pyinstaller.readthedocs.io/en/stable/) 
+To create application (`.exe` file) from python script (i.e. `myscript.py`), use [pyinstaller](https://pyinstaller.readthedocs.io/en/stable/) 
 
 Install pyinstaller and run following command in terminal:
 `pyinstaller -w -i <py.ico> -F myscript.py`
 
 ## Arduino code
 
-1. **accuracy_test.ino**<br/>Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
+1. **`accuracy_test.ino`**<br/>Used to conduct accuracy testing of flex sensor. Bends flex sensor using a servo from 0 to 90 degrees and gets voltage outputs from flex sensor.
 
 2. **event_test.ino**<br/>First version used for event testing. Controls a servo which is attached to the flex sensor. Servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves fast and slow for all angles to compare flex sensor's ability to respond to different movement speeds.
 
@@ -24,9 +24,9 @@ Install pyinstaller and run following command in terminal:
 6. **flex_sensor1.ino**<br/>Sketch stores voltages and logs time as flex sensor is bent. Sketch considers event to be anytime voltage is different from resting voltage. Sketch logs running timer and voltage values on raw data file only when event is occurring (so it doesn't log all data), and times of each event on separate event file.\
 \
 Outputs:
-    - resting.txt --> resting voltage value
-    - raw_data.txt --> elapsed time and voltages for each event
-    - events.txt --> Time of each finger event
+    - `resting.txt` --> resting voltage value
+    - `raw_data.txt` --> elapsed time and voltages for each event
+    - `events.txt` --> Time of each finger event
          
 7. **flex_sensor_live.ino**<br/>This is an old version of the TinyZero code. This code is useful for seeing bend angles, angular velocity, and event data in real time. But this version is more memory intensive and not good for long term data logging. Much of code here, such as calculating bend angles and identifying events, was moved to post processing script to save memory. Reduces memory usage reduces amount of raw data lost during data logging and storing process.\
 \
@@ -55,9 +55,9 @@ Outputs:
 \
 User inputs:
     - Flex sensor resistance at 0 and 90 degrees
-    - resting.txt --> resting voltage value
-    - raw_data.txt --> time and voltage values
-    - events.txt --> time of each finger event
+    - `resting.txt` --> resting voltage value
+    - `raw_data.txt` --> time and voltage values
+    - `events.txt` --> time of each finger event
 
 3. **data_process2.py**<br/>2nd version of post processing script. Creates GUI for easy use. Requires user to manually upload following 3 files:
     - `resting.txt`
