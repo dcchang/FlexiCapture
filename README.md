@@ -5,6 +5,7 @@
 **Upload flex_final.ino to TinyZero processor board. Use data_process_current.exe, which was built from data_process_current.py, for post processing.**
 
 To create application (.exe file) from python script (i.e. myscript.py), use [pyinstaller](https://pyinstaller.readthedocs.io/en/stable/) 
+
 Install pyinstaller and run following command in terminal:
 pyinstaller -w -i <py.ico> -F myscript.py
 
@@ -57,10 +58,7 @@ Outputs: resting.txt --> resting voltage values for each time calibration is don
 Script to quickly get bend angles. User inputs resistance at 0 and 90 degrees. Used during accuracy and event testing.
 
 2. **data_process1.py**
-1st version of post processing script
-Does not create GUI so could only be used in terminal 
-
-User must input appropriate input text file names in terminal
+1st version of post processing script. Does not create GUI so could only be used in terminal. User must input appropriate input text file names in terminal.
 
 User inputs:
 1. Flex sensor resistance at 0 and 90 degrees
@@ -68,10 +66,32 @@ User inputs:
 3. raw_data.txt --> time and voltage values
 4. events.txt --> time of each finger event
 
-Outputs:
-One text file has calculations on every raw data point.
-Another text file has max bend angles and average angular velocities for every event
-Final text file provides overview giving total time and other parameters.
+3. **data_process2.py**
+2nd version of post processing script. Creates GUI for easy use. Requires user to manually upload following 3 files:
+1. resting.txt
+2. raw_data.txt
+3. events.txt
+
+4. **data_process3.py**
+3rd version of data processing app. User only has to upload SD card directory to run.
+
+5. **data_process_current.py**
+Final version of post processing script that makes GUI for easy use. Takes in data and calculates durations, bend angles, angular velocities, and more. Person uses GUI to upload SD card directory. Script can process more than one raw data file. 
+
+User inputs:
+
+1. Patient first name and last name
+2. SD card directory
+
+Program outputs:
+Folder titled firstname_lastname_data with following files:
+1. events.txt
+2. events_processed.txt
+3. post_processing.txt
+4. final_outputs.txt
+
+First three files have date and file count in name that corresponds to raw data file
+i.e. 49R_0_events.txt for the first raw data file created on April 9th
 
 
 
