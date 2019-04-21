@@ -23,7 +23,7 @@ Install pyinstaller and run following command in terminal:
 
 6. **flex_sensor1.ino**<br/>Sketch stores voltages and logs time as flex sensor is bent. Sketch considers event to be anytime voltage is different from resting voltage. Sketch logs running timer and voltage values on raw data file only when event is occurring (so it doesn't log all data), and times of each event on separate event file.\
 \
-Outputs:
+Outputs:\
 resting.txt --> resting voltage value\
 raw_data.txt --> elapsed time and voltages for each event\
 events.txt --> Time of each finger event
