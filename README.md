@@ -66,7 +66,7 @@ User inputs:
 
 4. **data_process3.py**<br/>3rd version of data processing app. User only has to upload SD card directory to run.
 
-5. **data_process_current.py**<br/>Final version of post processing script that makes GUI for easy use. Takes in data and calculates durations, bend angles, angular velocities, and more. Person uses GUI to upload SD card directory. Script can process more than one raw data file.\
+5. **data_process_current.py**<br/>Final version of post processing script that makes GUI for easy use. Takes in data and calculates durations, bend angles, angular velocities, and more. Person uses GUI to upload SD card directory. Script can process more than one raw data file.
 
     - User inputs:
         - Patient first name and last name
