@@ -68,15 +68,15 @@ User inputs:
 
 5. **data_process_current.py**<br/>Final version of post processing script that makes GUI for easy use. Takes in data and calculates durations, bend angles, angular velocities, and more. Person uses GUI to upload SD card directory. Script can process more than one raw data file.\
 \
-User inputs:
+-User inputs:
     - Patient first name and last name
     - SD card directory\
 \
-Program outputs:\
-Folder titled `firstname_lastname_data` with following files:
-    - `events.txt`
-    - `events_processed.txt`
-    - `post_processing.txt`
-    - `final_outputs.txt`
+-Program outputs:\
+    -Folder titled `firstname_lastname_data` with following files:
+        - `events.txt`
+        - `events_processed.txt`
+        - `post_processing.txt`
+        - `final_outputs.txt`
 \
 First three files have date and file count in name that corresponds to raw data file i.e. `49R_0_events.txt` for the first raw data file created on April 9th.
