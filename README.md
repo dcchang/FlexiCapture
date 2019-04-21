@@ -1,5 +1,8 @@
-# README
-*Lists out all the code and files used in this project.*
+# FlexiCapture
+
+FlexiCapture is a wearable device that tracks the finger motion of patients with a brachial plexus injury.
+
+*This lists out all the code and files used in this project.*
 *There are two folders of code, one containing all Arduino sketches and other containing post processing script written in Python.*
 
 **Upload `flex_final.ino` to TinyZero processor board. Use `data_process_current.exe`, which was built from `data_process_current.py`, for post processing.**
