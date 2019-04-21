@@ -43,7 +43,7 @@ raw data file(s) --> timestamps, running time, and voltage for all data
          
 9. **flex_final.ino**<br/>Final version of code for FlexiCapture, a continuous data logging wearable device. This sketch records output voltage changes as device is worn during daily activity. Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider. Sketch also records timestamps and time since sketch was first uploaded to board for every data point. Uses a capacitive sensor to determine when device is being worn and when to log data.\
 \
-Outputs:\ 
+Outputs:\
 resting.txt --> resting voltage values for each time calibration is done\
 raw data file(s) --> timestamps, running time, and voltage for all data
 
@@ -54,15 +54,15 @@ raw data file(s) --> timestamps, running time, and voltage for all data
 2. **data_process1.py**<br/>1st version of post processing script. Does not create GUI so could only be used in terminal. User must input appropriate input text file names in terminal.\
 \
 User inputs:\
-- Flex sensor resistance at 0 and 90 degrees\
-- resting.txt --> resting voltage value\
-- raw_data.txt --> time and voltage values\
-- events.txt --> time of each finger event\
+    - Flex sensor resistance at 0 and 90 degrees
+    - resting.txt --> resting voltage value
+    - raw_data.txt --> time and voltage values
+    - events.txt --> time of each finger event
 
 3. **data_process2.py**<br/>2nd version of post processing script. Creates GUI for easy use. Requires user to manually upload following 3 files:\
-- resting.txt\
-- raw_data.txt\
-- events.txt\
+    - resting.txt
+    - raw_data.txt
+    - events.txt
 
 4. **data_process3.py**<br/>3rd version of data processing app. User only has to upload SD card directory to run.
 
@@ -70,15 +70,15 @@ User inputs:\
 \
 User inputs:\
 \
-- Patient first name and last name\
-- SD card directory\
+    - Patient first name and last name
+    - SD card directory
 \
 Program outputs:\
 Folder titled firstname_lastname_data with following files:\
-- events.txt\
-- events_processed.txt\
-- post_processing.txt\
-- final_outputs.txt
+    - events.txt
+    - events_processed.txt
+    - post_processing.txt
+    - final_outputs.txt
 \
 First three files have date and file count in name that corresponds to raw data file\
 i.e. 49R_0_events.txt for the first raw data file created on April 9th
