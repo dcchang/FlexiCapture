@@ -1,6 +1,6 @@
 '''
 3rd version of data processing app
-Only takes in one raw data file
+User only has to upload SD card directory
 '''
 
 import os

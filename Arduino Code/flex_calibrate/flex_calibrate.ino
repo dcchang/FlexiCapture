@@ -1,4 +1,4 @@
-//stores voltage at 0 and 90 degrees and also gets 5 degree voltage difference
+//Stores voltage at 0 and 90 degrees. Should be done prior to using device.
 
 #include <SPI.h>
 #include <SD.h>

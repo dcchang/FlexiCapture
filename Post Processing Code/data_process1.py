@@ -1,17 +1,21 @@
 '''
-
 1st version of post processing script
 Does not create GUI so could only be used in terminal 
 
-Three main txt files for inputs and three txt files for outputs. One text file has calculations on every raw data point.
+User must input appropriate input text file names in terminal
+
+User inputs:
+1. Flex sensor resistance at 0 and 90 degrees
+2. resting.txt --> resting voltage value
+3. raw_data.txt --> time and voltage values
+4. events.txt --> time of each finger event
+
+Outputs:
+One text file has calculations on every raw data point.
 Another text file has max bend angles and average angular velocities for every event
 Final text file provides overview giving total time and other parameters.
-
-Things user needs to do: define the inputs and define the outputs
-Inputs: text files
-Outputs: text files
-
 '''
+
 import pandas as pd
 import numpy as np
 
@@ -33,18 +37,16 @@ resting_voltage_file = open('resting.txt','r')
 resting_voltage = float(resting_voltage_file.readline())
 resting_bend_resistance = abs(r1*(v_in/(resting_voltage-1.0)))
 print(resting_bend_resistance)
-# resting_bend_resistance = abs(-r3*(r2*v_in + resting_voltage*(r1 + r2))/(resting_voltage*(r1+r2) - r1*v_in)) #Equation will probably be changed
 resting_bend_angle = np.interp(resting_bend_resistance,[STRAIGHT_RESISTANCE, MAX_RESISTANCE],[0,90.0])
 
 # filepath_raw_data = input("What is the filepath of your text file \'raw_data.txt\'?\n")
 # type(filepath)
 
-# filepath_finger_events = input("What is the filepath of your text file \'finger_events.txt\'?\n")
+# filepath_finger_events = input("What is the filepath of your text file \'events.txt\'?\n")
 # type(filepath)
 
 # df = pd.read_csv(filepath_raw_data,sep='\t',skip_blank_lines = False) #filepath should point to 'raw_data.txt'
 
-# df = pd.read_csv('C:\\Users\\David\\Documents\\raw_data.txt',sep='\t',skip_blank_lines = False) #filepath should point to 'raw_data.txt'
 df = pd.read_csv('raw_data.txt',sep='\t',skip_blank_lines = False) #filepath should point to 'raw_data.txt'
 df = df.append(pd.Series([np.nan,np.nan], index=df.columns ), ignore_index=True)
 #read in times and voltages
@@ -82,8 +84,6 @@ for voltage in voltages:
 	else:
 		#Calculate resistance, bend angle and angular velocity for every voltage value
 		bend_resistance = abs(r1*(v_in/(voltage-1.0)))
-		print(bend_resistance)
-		# bend_resistance = abs(-r3*(r2*v_in + voltage*(r1 + r2))/(voltage*(r1+r2) - r1*v_in)) #Equation will probably be changed
 		bend_angle = np.interp(bend_resistance,[STRAIGHT_RESISTANCE, MAX_RESISTANCE],[0,90.0]) - resting_bend_angle
 		bend_angles_event.append(bend_angle)
 		bend_angles.append(bend_angle)
@@ -105,7 +105,6 @@ df['Angular Velocity (degrees/sec)'] = angular_velocities
 df = df[['Time (ms)','Voltage (V)','Bend Angle (degrees)','Angular Velocity (degrees/sec)']]
 df.to_csv('post_processing.txt',sep='\t',index=False)
 
-# df2 = pd.read_csv('C:\\Users\\David\\Documents\\finger_events.txt',sep='\t')
 df2 = pd.read_csv('events.txt',sep='\t')
 time_durations = df2['Time (sec)']
 
@@ -113,7 +112,6 @@ df2['Max Bend Angle (degrees)'] = max_bend_angles
 df2['Average Angular Velocity (degrees/sec)'] = average_angular_velocities
 
 df2 = df2[['Time (sec)','Max Bend Angle (degrees)', 'Average Angular Velocity (degrees/sec)']]
-# df2.to_csv('C:\\Users\\David\\Documents\\finger_events_processed.txt',sep='\t',index=False)
 df2.to_csv('finger_events_processed.txt',sep='\t',index=False)
 
 #Final outputs
@@ -122,7 +120,6 @@ average_time = np.mean(time_durations)
 average_max_angle = np.mean(max_bend_angles)
 average_angular_velocity = np.mean(average_angular_velocities)  #Or np.mean(angular_velocities), not sure which one to use
 
-# output = open('C:\\Users\\David\\Documents\\final_outputs.txt','w')
 output = open('final_outputs.txt','w')
 output.write('Total Time (Hours) = %s\n' % total_time)
 output.write('Average Duration (sec) = %s\n' % average_time)

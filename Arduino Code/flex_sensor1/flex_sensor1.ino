@@ -1,11 +1,11 @@
-//sketch stores voltages and logs time as flex sensor is bent.
-//Sketch considers event to be anytime voltage is different from resting voltage.
-//Sketch logs running timer and voltage values on raw data file only when event is occurring (so it doesn't log all data), 
-//and times of each event on separate event file.
-//Outputs: resting.txt --> resting voltage value
-//         raw_data.txt --> elapsed time and voltages for each event
-//         events.txt --> Time of each finger event
-
+/*sketch stores voltages and logs time as flex sensor is bent.
+Sketch considers event to be anytime voltage is different from resting voltage.
+Sketch logs running timer and voltage values on raw data file only when event is occurring (so it doesn't log all data), 
+and times of each event on separate event file.
+Outputs: resting.txt --> resting voltage value
+         raw_data.txt --> elapsed time and voltages for each event
+         events.txt --> Time of each finger event
+*/
 #include <ArduinoSTL.h>
 #include <SPI.h>
 #include <SD.h>

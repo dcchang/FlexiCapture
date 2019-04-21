@@ -1,9 +1,10 @@
-//This sketch records output voltage changes as flex sensor bends and device is worn during daily activity.
-//Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider.
-//Sketch also records timestamps and time since sketch was first uploaded to board for every data point
+/*This sketch records output voltage changes as flex sensor bends and device is worn during daily activity.
+Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider.
+Sketch also records timestamps and time since sketch was first uploaded to board for every data point
 
-//Outputs: resting.txt --> resting voltage value
-//         raw data file(s) --> timestamps, running time, and voltage for all data
+Outputs: resting.txt --> resting voltage value
+         raw data file(s) --> timestamps, running time, and voltage for all data
+*/
 
 //libraries
 #include <ArduinoSTL.h>         //for using vectors

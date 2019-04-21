@@ -1,11 +1,12 @@
-//Final version of code for FlexiCapture device, a continuous data logging wearable device.
-//This sketch records output voltage changes as device is worn during daily activity.
-//Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider.
-//Sketch also records timestamps and time since sketch was first uploaded to board for every data point
-//Uses a capacitive sensor to determine when device is being worn and when to log data.
+/*Final version of code for FlexiCapture device, a continuous data logging wearable device.
+This sketch records output voltage changes as device is worn during daily activity.
+Output voltage increases as flex sensor resistance increases (as it bends more) because flex sensor is R2 in voltage divider.
+Sketch also records timestamps and time since sketch was first uploaded to board for every data point
+Uses a capacitive sensor to determine when device is being worn and when to log data.
 
-//Outputs: resting.txt --> resting voltage values for each time calibration is done
-//         raw data file(s) --> timestamps, running time, and voltage for all data
+Outputs: resting.txt --> resting voltage values for each time calibration is done
+         raw data file(s) --> timestamps, running time, and voltage for all data
+*/
 
 //libraries
 #include <ArduinoSTL.h>         //for using vectors

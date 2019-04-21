@@ -1,17 +1,18 @@
-//This is an old version of the TinyZero code. This code is useful for seeing bend angles, angular velocity, and event data in real time
-//But this version is more memory intensive and not good for long term data logging.
-//Much of code here, such as calculating bend angles and identifying events, was moved to post processing script to save memory
-//Reduces memory usage reduces amount of raw data lost during data logging and storing process.
+/*This is an old version of the TinyZero code. This code is useful for seeing bend angles, angular velocity, and event data in real time
+But this version is more memory intensive and not good for long term data logging.
+Much of code here, such as calculating bend angles and identifying events, was moved to post processing script to save memory
+Reduces memory usage reduces amount of raw data lost during data logging and storing process.
 
-//Script stores all data in raw data file
-//Script also stores data that meets conditions as events in separate event file
-//Script calculates bend angle and angular velocity in real time
+Script stores all data in raw data file
+Script also stores data that meets conditions as events in separate event file
+Script calculates bend angle and angular velocity in real time
 
-//script gets bend angle based on changes in voltage 
+script gets bend angle based on changes in voltage 
 
-//Outputs: resting.txt --> resting voltage value
-//         raw_data.txt --> running time, voltages, angles, angular velocities
-//         events.txt --> running time, voltages, angles, angular velocities when voltage is greater than 5 degree threshold
+Outputs: resting.txt --> resting voltage value
+         raw_data.txt --> running time, voltages, angles, angular velocities
+         events.txt --> running time, voltages, angles, angular velocities when voltage is greater than 5 degree threshold
+*/
 
 //Libraries
 #include <ArduinoSTL.h>  //to use vectors

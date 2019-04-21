@@ -1,5 +1,6 @@
 '''
-2nd version of post processing script. Requires user to manually select 3 files
+GUI for easy use
+2nd version of post processing script. Requires user to manually select 3 files. 
 3 files:
 1. resting.txt
 2. raw_data.txt

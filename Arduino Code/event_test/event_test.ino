@@ -1,7 +1,7 @@
-//This sketch is the first version used for event testing. This sketch controls a servo which is attached to the flex sensor
-//The servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves fast 
-//and slow for all angles to compare flex sensor's ability to respond to different movement speeds.
-
+/*This sketch is the first version used for event testing. This sketch controls a servo which is attached to the flex sensor
+The servo moves to 10 degrees then back to 0 degrees. It does this again for 8 degrees and 6 degrees. The servo moves fast 
+and slow for all angles to compare flex sensor's ability to respond to different movement speeds.
+*/
 #include <Servo.h>
 
 Servo myservo;  // create servo object to control a servo

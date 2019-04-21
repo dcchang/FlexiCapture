@@ -1,4 +1,4 @@
-#Script to get bend angles
+#Script to quickly get bend angles
 
 import numpy as np
 
