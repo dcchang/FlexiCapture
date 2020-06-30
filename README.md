@@ -4,6 +4,7 @@ This was the software for my senior design project at the University of Michigan
 
 *This lists out all the code and files used in this project.*
 *There are two folders of code, one containing all Arduino sketches and other containing post processing script written in Python.*
+*Instructions on how to use code are as follows.*
 
 **Upload `flex_final.ino` to TinyZero processor board. Use `data_process_current.exe`, which was built from `data_process_current.py`, for post processing.**
 
