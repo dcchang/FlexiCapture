@@ -2,7 +2,7 @@
 
 **Date:** April 2019
 
-This was the software for my senior design project at the University of Michigan Department of Biomedical Engineering. We worked with two researchers in the Department of Neurosurgery at Michigan Medicine to design FlexiCapture, a flex sensor-based wearable device that tracks the finger motion of patients who are recovering from a brachial plexus nerve reconstruction surgery.
+This was the software for my senior design project at the University of Michigan Department of Biomedical Engineering. We worked with two researchers in the Department of Neurosurgery at Michigan Medicine to design FlexiCapture, a flex sensor-based wearable device that tracks the finger motion of patients who are recovering from a brachial plexus nerve reconstruction surgery. Additional details about the software and complete device design and application can be found in the Final Report.
 
 *This lists out all the code and files used in this project.*
 *There are two folders of code, one containing all Arduino sketches and other containing post processing script written in Python.*
